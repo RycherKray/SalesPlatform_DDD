@@ -25,11 +25,12 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         public IReadOnlyCollection<SaleItem> Items => _items.AsReadOnly();
 
         protected Sale() { }
+            
 
-        public Sale(string saleNumber, DateTime saleDate, string customer, string branch)
+        public Sale(DateTime saleDate, string customer, string branch)
         {
             Id = Guid.NewGuid();
-            SaleNumber = saleNumber;
+            SaleNumber = $"SL-{DateTime.UtcNow:yyyyMMdd}-{Guid.NewGuid().ToString()[..5].ToUpper()}";        
             SaleDate = saleDate;
             Customer = customer;
             Branch = branch;

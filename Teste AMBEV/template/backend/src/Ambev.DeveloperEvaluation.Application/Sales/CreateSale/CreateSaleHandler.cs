@@ -23,11 +23,11 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
 
         public async Task<CreateSaleResult> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
         {
-            var sale = new Sale(request.SaleNumber,request.Date, request.Customer, request.Branch);
+            var sale = new Sale(request.Date, request.Customer, request.Branch);
 
             foreach (var item in request.Items)
             {
-                sale.AddItem(item.ProductName, item.Quantity, item.UnitPrice);
+                sale.AddItem(item.Product, item.Quantity, item.UnitPrice);
             }
 
             await _saleRepository.AddAsync(sale, cancellationToken);

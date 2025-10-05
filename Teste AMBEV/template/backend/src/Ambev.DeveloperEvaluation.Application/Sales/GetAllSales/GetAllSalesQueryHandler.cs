@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Application.Sales.GetAllSales
 {
-    public class GetAllSalesHandler : IRequestHandler<GetAllSalesCommand, List<GetAllSalesResult>>
+    public class GetAllSalesQueryHandler : IRequestHandler<GetAllSalesQuery, List<GetAllSalesResult>>
     {
         private readonly ISaleRepository _saleRepository;
         private readonly IMapper _mapper;
 
-        public GetAllSalesHandler(ISaleRepository saleRepository, IMapper mapper)
+        public GetAllSalesQueryHandler(ISaleRepository saleRepository, IMapper mapper)
         {
             _saleRepository = saleRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<GetAllSalesResult>> Handle(GetAllSalesCommand request, CancellationToken cancellationToken)
+        public async Task<List<GetAllSalesResult>> Handle(GetAllSalesQuery request, CancellationToken cancellationToken)
         {
             var sales = await _saleRepository.GetAllAsync(cancellationToken);
             return _mapper.Map<List<GetAllSalesResult>>(sales);

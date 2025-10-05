@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
 {
     public class CreateSaleCommand : IRequest<CreateSaleResult>
-    {
-        public string SaleNumber { get; set; } = string.Empty;  
+    {      
         public string Customer { get; set; } = string.Empty;
         public string Branch { get; set; } = string.Empty;
         public DateTime Date { get; set; } = DateTime.UtcNow;
@@ -19,7 +18,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
 
     public class CreateSaleItemDto
     {
-        public string ProductName { get; set; }
+        public string Product { get; set; } = string.Empty;
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
     }
