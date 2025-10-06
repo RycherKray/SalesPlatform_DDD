@@ -14,6 +14,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.GetAllSales
         public string Branch { get; set; } = string.Empty;
         public DateTime Date { get; set; }
         public decimal TotalAmount { get; set; }
+        public bool Cancelled { get; set; }
 
         public List<SaleItemResult> Items { get; set; } = new();
     }
