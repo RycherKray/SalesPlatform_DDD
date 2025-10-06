@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.Domain.ValueObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,14 +58,13 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
             TotalAmount = _items.Sum(i => i.Total);
         }
 
-        private Discount CalculateDiscount(int quantity)
+        private decimal CalculateDiscount(int quantity)
         {
             if (quantity >= 10 && quantity <= 20)
-                return Discount.TwentyPercent;
+                return 0.20m;
             if (quantity >= 4)
-                return Discount.TenPercent;
-
-            return Discount.None;
+                return 0.10m;
+            return 0m;
         }
     }
 }

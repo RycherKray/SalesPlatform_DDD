@@ -144,26 +144,22 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.OwnsOne("Ambev.DeveloperEvaluation.Domain.ValueObjects.Discount", "Discount", b1 =>
-                        {
-                            b1.Property<Guid>("SaleItemId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uuid");
-
-                            b1.Property<decimal>("Percentage")
-                                .HasColumnType("decimal(5,2)")
-                                .HasColumnName("DiscountPercentage");
-
-                            b1.HasKey("SaleItemId");
-
-                            b1.ToTable("SaleItems");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SaleItemId");
-                        });
-
-                    b.Navigation("Discount")
+                    b.Property<string>("Product")
+                        .HasColumnType("character varying(100)")
                         .IsRequired();
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(5,2)")
+                        .HasDefaultValue(0);
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
                 });
 
             modelBuilder.Entity("Ambev.DeveloperEvaluation.Domain.Entities.Sale", b =>

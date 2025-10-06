@@ -1,4 +1,5 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Entities;
+﻿using Ambev.DeveloperEvaluation.Application.Users.CreateUser;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,9 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
     {
         public CreateSaleProfile()
         {
+            CreateMap<CreateSaleCommand, Sale>();
             CreateMap<Sale, CreateSaleResult>();
-            CreateMap<SaleItem, SaleItemResult>();
+            CreateMap<SaleItem, SaleItemResult>();            
         }
     }
 }

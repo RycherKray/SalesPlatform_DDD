@@ -25,13 +25,9 @@ namespace Ambev.DeveloperEvaluation.ORM.Mapping
             builder.Property(i => i.UnitPrice).HasColumnType("decimal(18,2)");
             builder.Property(i => i.Total).HasColumnType("decimal(18,2)");
 
-            // Discount mapeado como Owned Type
-            builder.OwnsOne(i => i.Discount, d =>
-            {
-                d.Property(dd => dd.Percentage)
-                 .HasColumnName("DiscountPercentage")
-                 .HasColumnType("decimal(5,2)");
-            });
+            builder.Property(i => i.Discount)              
+                .HasColumnType("decimal(5,2)")
+                .HasDefaultValue(0);
         }
     }
 }

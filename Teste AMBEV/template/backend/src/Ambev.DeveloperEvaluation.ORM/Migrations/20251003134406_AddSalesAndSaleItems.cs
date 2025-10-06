@@ -49,7 +49,7 @@ namespace Ambev.DeveloperEvaluation.ORM.Migrations
                     Product = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
-                    DiscountPercentage = table.Column<decimal>(type: "numeric(5,2)", nullable: false),
+                    Discount = table.Column<decimal>(type: "numeric(5,2)", nullable: false),
                     Total = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
                     SaleId = table.Column<Guid>(type: "uuid", nullable: true)
                 },

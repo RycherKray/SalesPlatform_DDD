@@ -70,15 +70,13 @@ public class Program
 
             app.MapControllers();
 
-            if (!app.Environment.IsDevelopment())
+           
+            using (var scope = app.Services.CreateScope())
             {
-
-                using (var scope = app.Services.CreateScope())
-                {
-                    var db = scope.ServiceProvider.GetRequiredService<DefaultContext>();
-                    db.Database.Migrate();
-                }
+                var db = scope.ServiceProvider.GetRequiredService<DefaultContext>();
+                db.Database.Migrate();
             }
+          
 
             app.Run();
         }

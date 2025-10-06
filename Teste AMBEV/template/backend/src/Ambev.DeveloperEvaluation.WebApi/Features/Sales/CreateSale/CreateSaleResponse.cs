@@ -1,4 +1,6 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale
+﻿using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetAllSales;
+
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale
 {
     public class CreateSaleResponse
     {
@@ -8,6 +10,6 @@
         public string Customer { get; set; } = string.Empty;
         public string Branch { get; set; } = string.Empty;
         public decimal TotalAmount { get; set; }
-        public bool Cancelled { get; set; }
+        public bool Cancelled { get; set; }        
     }
 }

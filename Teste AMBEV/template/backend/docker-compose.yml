@@ -34,6 +34,15 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
+  
+  ambev.developerevaluation.adminer:
+    container_name: ambev_developer_evaluation_adminer
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"  
+    depends_on:
+      - ambev.developerevaluation.database
 
   ambev.developerevaluation.nosql:
     container_name: ambev_developer_evaluation_nosql 

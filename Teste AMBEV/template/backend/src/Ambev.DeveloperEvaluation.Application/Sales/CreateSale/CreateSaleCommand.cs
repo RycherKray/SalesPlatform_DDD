@@ -11,7 +11,7 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
     {      
         public string Customer { get; set; } = string.Empty;
         public string Branch { get; set; } = string.Empty;
-        public DateTime Date { get; set; } = DateTime.UtcNow;
+        public DateTime Date { get; set; } = DateTime.UtcNow;       
 
         public List<CreateSaleItemDto> Items { get; set; } = new();
     }
@@ -20,6 +20,6 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale
     {
         public string Product { get; set; } = string.Empty;
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }       
     }
 }
