@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -34,7 +34,7 @@ export class SalesCreate {
   totalAmount = 0;
   loading = false;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private snack: MatSnackBar) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private snack: MatSnackBar, private cdr: ChangeDetectorRef) {
     this.saleForm = this.fb.group({
       customer: ['', Validators.required],
       branch: ['', Validators.required],
@@ -66,7 +66,18 @@ export class SalesCreate {
     this.totalAmount = this.items.value.reduce((sum: number, item: any) => {
       const quantity = item.quantity || 0;
       const price = item.unitPrice || 0;
-      return sum + quantity * price;
+      let discount = 0;
+      if (quantity >= 4 && quantity < 10) discount = 0.1;
+      else if (quantity >= 10 && quantity <= 20) discount = 0.2;
+      else if (quantity > 20) {
+        alert('Não é possível vender mais de 20 unidades do mesmo produto.');
+        item.quantity = 20;
+      }  
+
+      item.discount = discount;
+
+      const itemTotal = quantity * price * (1 - discount);
+      return sum + itemTotal;
     }, 0);
   }
 
@@ -77,20 +88,26 @@ export class SalesCreate {
     }
 
     this.loading = true;
+    this.cdr.detectChanges();
     const payload = this.saleForm.value;
 
     this.http.post('http://localhost:8080/api/sales', payload).subscribe({
-      next: () => {
-        this.snack.open('Venda criada com sucesso!', 'Fechar', { duration: 3000 });
-        this.saleForm.reset();
-        this.items.clear();
-        this.totalAmount = 0;
+      next: (res) => {
         this.loading = false;
+        alert('Venda registrada com sucesso!');
+        this.saleForm.reset();
+        this.items.clear();        
+        this.totalAmount = 0;  
+        this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
-        console.error(err);
-        this.snack.open('Erro ao criar venda!', 'Fechar', { duration: 3000 });
+        console.error('Erro ao salvar venda:', err);
+        alert('Erro ao salvar venda. Verifique os dados e tente novamente.');
+        
+        this.items.clear();
         this.loading = false;
+        this.cdr.detectChanges();        
       },
     });
   }

@@ -40,6 +40,12 @@
         <button mat-icon-button color="warn" (click)="removeItem(i)">
           <mat-icon>delete</mat-icon>
         </button>
+
+        <div class="discount-info" *ngIf="item.value.discount > 0">
+            <small style="color: green; font-weight: 500;">
+            Desconto aplicado: {{ item.value.discount * 100 }}%
+            </small>
+        </div>
       </div>
     </div>
 
