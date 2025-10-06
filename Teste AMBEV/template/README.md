@@ -69,14 +69,15 @@ Passos para rodar
 4. Acesse a aplicação:
   http://localhost:4200
 
-Execução Rápida (Resumo)
-# Subir backend e banco
+# Execução Rápida (Resumo)
+Subir backend e banco
 
   docker-compose build
   
   docker compose up -d
 
-# Rodar frontend
+Rodar frontend
+
 cd frontend/developer-store
 npm install
 npm start
