@@ -16,7 +16,7 @@ Git para clonar o repositório
 
 
 
-Passos para rodar
+# Passos para rodar BackEnd
 
 1. Clone o repositório:
 
@@ -52,7 +52,7 @@ Se alguém não tiver Docker instalado, pode seguir os links acima na parte de p
 
 ---
 
-Frontend (Angular)
+# Passos para rodar Frontend (Angular)
 
 Passos para rodar
 
@@ -64,15 +64,17 @@ Passos para rodar
   npm install
 
 3. Inicie o servidor local:
-    npm start
+  npm start
    
 4. Acesse a aplicação:
-   http://localhost:4200
+  http://localhost:4200
 
 Execução Rápida (Resumo)
 # Subir backend e banco
-docker-compose build
-docker compose up -d
+
+  docker-compose build
+  
+  docker compose up -d
 
 # Rodar frontend
 cd frontend/developer-store
