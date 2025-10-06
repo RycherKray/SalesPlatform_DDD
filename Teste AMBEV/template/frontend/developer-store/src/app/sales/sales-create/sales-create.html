@@ -1,0 +1,63 @@
+<div class="create-container">
+  <h2>Registrar Nova Venda</h2>
+
+  <form [formGroup]="saleForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Cliente</mat-label>
+      <input matInput formControlName="customer" placeholder="Nome do cliente" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Filial</mat-label>
+      <input matInput formControlName="branch" placeholder="Ex: São Paulo - Zona Norte" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full">
+      <mat-label>Data da Venda</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="saleDate" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <h3>Itens da Venda</h3>
+    <div formArrayName="items">
+      <div class="item" *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="outline" class="product">
+          <mat-label>Produto</mat-label>
+          <input matInput formControlName="product" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="quantity">
+          <mat-label>Quantidade</mat-label>
+          <input matInput type="number" formControlName="quantity" (input)="updateTotal()" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="price">
+          <mat-label>Preço Unitário</mat-label>
+          <input matInput type="number" formControlName="unitPrice" (input)="updateTotal()" />
+        </mat-form-field>
+
+        <button mat-icon-button color="warn" (click)="removeItem(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <button mat-raised-button color="accent" (click)="addItem()">Adicionar Item</button>
+
+    <div class="total">
+      <strong>Total: R$ {{ totalAmount | number: '1.2-2' }}</strong>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="loading"
+      class="submit-btn"
+    >
+      <mat-icon>check_circle</mat-icon>
+      {{ loading ? 'Salvando...' : 'Salvar Venda' }}
+    </button>
+  </form>
+</div>

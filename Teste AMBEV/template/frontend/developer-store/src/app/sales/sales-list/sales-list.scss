@@ -1,0 +1,27 @@
+.sales-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 16px;
+}
+
+.item-card {
+  margin: 8px 0;
+  background-color: #fafafa;
+}
+
+.cancelled {
+  color: #b71c1c;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0;
+}
+
+.empty {
+  text-align: center;
+  color: #666;
+  margin-top: 40px;
+}

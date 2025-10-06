@@ -1,0 +1,53 @@
+<div class="sales-container">
+  <h2>Lista de Vendas</h2>
+
+  <!-- Botão para atualizar a lista -->
+  <div class="actions refresh">
+    <button mat-raised-button color="primary" (click)="fetchSales()">
+      <mat-icon>refresh</mat-icon> Atualizar Lista
+    </button>
+  </div>
+
+  <!-- Lista de Vendas -->
+  <mat-accordion *ngIf="sales.length; else emptyList">
+    <mat-expansion-panel *ngFor="let sale of sales">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ sale.saleNumber || sale.id }} — {{ sale.customer || 'Cliente não informado' }}
+        </mat-panel-title>
+        <mat-panel-description>
+          Total: R$ {{ sale.totalAmount | number: '1.2-2' }}
+          <span *ngIf="sale.cancelled" class="cancelled"> (Cancelado)</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <!-- Itens da venda -->
+      <mat-card *ngFor="let item of sale.items" class="item-card">
+        <mat-card-title>{{ item.product }}</mat-card-title>
+        <mat-card-content>
+          <p>Quantidade: {{ item.quantity }}</p>
+          <p>Preço Unitário: R$ {{ item.unitPrice | number: '1.2-2' }}</p>
+          <p>Total: R$ {{ item.total | number: '1.2-2' }}</p>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Botão de cancelar venda -->
+      <div class="actions">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="cancelSale(sale.id)"
+          [disabled]="sale.cancelled"
+        >
+          <mat-icon>cancel</mat-icon>
+          Cancelar Venda
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Quando não há vendas -->
+  <ng-template #emptyList>
+    <p class="empty">Nenhuma venda encontrada.</p>
+  </ng-template>
+</div>
