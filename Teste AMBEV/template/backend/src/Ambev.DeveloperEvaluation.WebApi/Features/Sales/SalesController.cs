@@ -1,6 +1,8 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+﻿using Ambev.DeveloperEvaluation.Application.Sales.CancelSale;
+using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetAllSales;
 using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CancelSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetAllSales;
 using AutoMapper;
@@ -57,6 +59,22 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
                 Message = "Vendas recuperadas com sucesso",
                 Data = _mapper.Map<List<GetAllSalesResponse>>(result)
             });
+        }
+
+        [HttpPatch("{id}/cancel")]
+        public async Task<IActionResult> CancelSale(Guid id, CancellationToken cancellationToken)
+        {
+            var command = new CancelSaleCommand { SaleId = id };
+            var result = await _mediator.Send(command, cancellationToken);
+            var response = _mapper.Map<CancelSaleResponse>(result);
+
+            return Ok(new ApiResponseWithData<CancelSaleResponse>
+            {
+                Success = true,
+                Message = "Venda cancelada com sucesso",
+                Data = _mapper.Map<CancelSaleResponse>(result)
+            });
+            
         }
     }
 }

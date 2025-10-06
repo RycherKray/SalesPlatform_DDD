@@ -50,7 +50,15 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 
         public void Cancel()
         {
+            if (Cancelled)
+                throw new InvalidOperationException("This sale has already been cancelled.");
+
             Cancelled = true;
+
+            // (Opcional) Adicionar lógica de domínio:
+            // - Cancelar itens individualmente
+            // - Registrar evento SaleCancelled
+            // - Marcar data/hora do cancelamento
         }
 
         private void RecalculateTotal()
@@ -66,5 +74,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
                 return 0.10m;
             return 0m;
         }
+
+
     }
 }
