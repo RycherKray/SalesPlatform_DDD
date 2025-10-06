@@ -20,32 +20,28 @@ Passos para rodar
 
 1. Clone o repositório:
 
-git clone <url-do-repo>
-cd <nome-da-pasta>
+  git clone <url-do-repo>
+  cd <nome-da-pasta>
 
 
 2. Construa e suba os containers:
-
-docker compose up --build
-
-
-3. Verifique os serviços em execução:
-
-docker compose ps
+ 
+  docker-compose build
+  
+  docker-compose up
 
 
-4. Acesse a aplicação:
+4. Verifique os serviços em execução:
 
-API: http://localhost:8080
+  docker compose ps
 
-Swagger (se habilitado): http://localhost:8080/swagger
+5. Isso iniciará automaticamente:
 
+  API em http://localhost:8080
 
+  Banco de dados PostgreSQL em localhost:5432
 
-
-Parar os serviços
-
-docker compose down
+  Adminer (console SQL opcional) em http://localhost:8081
 
 
 ---
@@ -56,4 +52,29 @@ Se alguém não tiver Docker instalado, pode seguir os links acima na parte de p
 
 ---
 
+Frontend (Angular)
 
+Passos para rodar
+
+1. Acesse o diretório do frontend:
+
+  cd frontend/developer-store
+
+2. Instale as dependências:
+  npm install
+
+3. Inicie o servidor local:
+    npm start
+   
+4. Acesse a aplicação:
+   http://localhost:4200
+
+Execução Rápida (Resumo)
+# Subir backend e banco
+docker-compose build
+docker compose up -d
+
+# Rodar frontend
+cd frontend/developer-store
+npm install
+npm start
